@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,12 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
         this.inflater = LayoutInflater.from(c);
     }
 
+    public FoodListAdaptor(Context c, List<Food> food){
+        context = c;
+        foods = food;
+        this.inflater = LayoutInflater.from(c);
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,14 +45,14 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.foodImage.setImageResource(images.get(position));
-        holder.foodName.setText(names.get(position));
+        holder.foodImage.setImageResource(foods.get(position).getImage());
+        holder.foodName.setText(foods.get(position).getName());
     }
 
 
     @Override
     public int getItemCount() {
-        return names.size();
+        return foods.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
