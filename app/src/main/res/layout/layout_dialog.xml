@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/food_name"
+        style="@android:style/Widget.Material.EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="70dp"
+        android:hint="Item Name" />
+
+    <Spinner
+        android:id="@+id/month_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_below="@+id/ex_dateTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:entries="@array/Month" />
+
+    <Spinner
+        android:id="@+id/day_spinner"
+        android:layout_width="98dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/ex_dateTV"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="17dp"
+        android:layout_toEndOf="@+id/month_spinner"
+        android:entries="@array/Day" />
+
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/month_spinner"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="90dp"
+        android:entries="@array/Category" />
+
+    <Switch
+        android:id="@+id/notification_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_below="@+id/category_spinner"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="114dp"
+        android:text="Turn On Notification" />
+
+    <TextView
+        android:id="@+id/ex_dateTV"
+        android:layout_width="207dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/food_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="133dp"
+        android:text="Enter Expiration Date (M/D/Y)" />
+
+    <EditText
+        android:id="@+id/expiration_year"
+        android:layout_width="134dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ex_dateTV"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/month_spinner"
+        android:ems="10"
+        android:hint="Year"
+        android:inputType="date" />
+
+</RelativeLayout>

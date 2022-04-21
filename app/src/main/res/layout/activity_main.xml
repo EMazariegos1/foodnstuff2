@@ -8,12 +8,23 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/food_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="367dp"
+        android:layout_height="556dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.325" />
+
+    <Button
+        android:id="@+id/open_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="open dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/food_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>
