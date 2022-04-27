@@ -12,19 +12,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHolder> {
+public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHolder>  {
     List<String> names;
     List<Integer> images;
     List<Food> foods;
     Context context;
     LayoutInflater inflater;
+    ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2 listener;
+
 
     public FoodListAdaptor(Context c, List<String> name, List<Integer> image){
         context = c;
+        listener = (ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2) c;
         names = name;
         images = image;
         this.inflater = LayoutInflater.from(c);
@@ -48,14 +54,13 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
         holder.foodImage.setImageResource(foods.get(position).getImage());
         holder.foodName.setText(foods.get(position).getName());
     }
-
-
     @Override
     public int getItemCount() {
         return foods.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2 {
         ImageView foodImage;
         TextView foodName;
 
@@ -67,11 +72,15 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO make clicking the cardview open the edit popup
-                    //todo video that shows how to search items https://youtu.be/sJ-Z9G0SDhc
-                    Toast.makeText(view.getContext(), "Button number "+ getAdapterPosition() + " was clicked", Toast.LENGTH_SHORT).show();
+
+                    ((MainActivity)context).openEditDialog(foods.get(getAdapterPosition()), getAdapterPosition(), context);
                 }
             });
+        }
+
+        @Override
+        public void applyTexts(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category) {
+
         }
     }
 }
