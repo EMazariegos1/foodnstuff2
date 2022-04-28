@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener{
+public class MainActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener, ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2{
     RecyclerView foodList;
     List<Food> foods;
     FoodListAdaptor adaptor;
@@ -86,6 +87,10 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     public void openDialog() {
         ExampleDialog exampleDialog = new ExampleDialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+    public void openEditDialog(Food food, int position, Context c){
+        ExampleDialogDeleteBecauseEricWantedIt exampleDialogDeleteBecauseEricWantedIt = new ExampleDialogDeleteBecauseEricWantedIt(food, position, c);
+        exampleDialogDeleteBecauseEricWantedIt.show(getSupportFragmentManager(), "example dialoge");
     }
 
     @Override
