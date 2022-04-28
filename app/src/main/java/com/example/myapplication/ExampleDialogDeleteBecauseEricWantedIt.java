@@ -58,7 +58,7 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 ((MainActivity)context).foods.remove(position);
-                ((MainActivity)context).adaptor.notifyItemChanged(((MainActivity)context).foods.size());
+                ((MainActivity)context).adaptor.notifyItemRemoved(position);
             }
         });
 
