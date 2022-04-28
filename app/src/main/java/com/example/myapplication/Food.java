@@ -13,6 +13,11 @@ public class Food {
         this.notification = notification;
     }
 
+    public Food(String name, Integer image){
+        this.name = name;
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }
