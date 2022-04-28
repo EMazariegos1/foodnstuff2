@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,14 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener, ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2{
     RecyclerView foodList;
     List<Food> foods;
-    List<String> names;
-    List<Integer> images;
     FoodListAdaptor adaptor;
     private Button opdialog;
+    Integer[] images;
     private static final String SHARED_PREF_KEY = "shared_preferences";
     private static final String EVENT_LIST_KEY = "event_list_key";
 
@@ -38,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
 
         foods = new ArrayList<>();
         loadEvents();
-        names = new ArrayList<>();
-        images = new ArrayList<>();
+
+        images = new Integer[]{R.drawable.ic_baseline_add_photo_alternate, R.drawable.meat, R.drawable.vegetable, R.drawable.fruit, R.drawable.dairy, R.drawable.pastry, R.drawable.condiments};
 
 //code for recyclerview
         adaptor = new FoodListAdaptor(this, foods);
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
                 openDialog();
             }
         });
+
     }
 
     private void saveEvents() {
@@ -93,7 +95,17 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
 
     @Override
     public void applyTexts(String itemName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category) {
-        foods.add(new Food(itemName, R.drawable.chicken));
+        Integer test = R.drawable.meat;
+        Resources res = getResources();
+        String[] types = res.getStringArray(R.array.Category);
+
+        for (int i = 0; i < types.length; i++) {
+            if(category.equals(types[i])){
+                test = images[i];
+            }
+        }
+
+        foods.add(new Food(itemName, test));
         adaptor.notifyItemChanged(foods.size()-1);
     }
 }
