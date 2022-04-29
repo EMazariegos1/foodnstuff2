@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,28 +19,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHolder>  {
-    List<String> names;
-    List<Integer> images;
+public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHolder> implements Filterable {
     List<Food> foods;
+    List<Food> foodsFull;
     Context context;
     LayoutInflater inflater;
-    ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2 listener;
-
-
-    public FoodListAdaptor(Context c, List<String> name, List<Integer> image){
-        context = c;
-        listener = (ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2) c;
-        names = name;
-        images = image;
-        this.inflater = LayoutInflater.from(c);
-    }
 
     public FoodListAdaptor(Context c, List<Food> food){
         context = c;
         foods = food;
+        foodsFull = new ArrayList<>(foods);
         this.inflater = LayoutInflater.from(c);
     }
 
@@ -59,6 +52,41 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
         return foods.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return foodsFilter;
+    }
+
+    Filter foodsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Food> filteredList = new ArrayList<>();
+
+            if(charSequence == null || charSequence.length() == 0){
+                filteredList.addAll(foodsFull);
+            }else{
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                for (Food item: foodsFull) {
+                    if (item.getName().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            foods.clear();
+            foods.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2 {
         ImageView foodImage;
@@ -72,7 +100,7 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+//todo video that shows how to search items https://youtu.be/sJ-Z9G0SDhc
                     ((MainActivity)context).openEditDialog(foods.get(getAdapterPosition()), getAdapterPosition(), context);
                 }
             });
