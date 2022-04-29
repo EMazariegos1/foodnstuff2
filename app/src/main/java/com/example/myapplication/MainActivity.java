@@ -100,18 +100,20 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
 
     @Override
     public void applyTexts(String itemName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category) {
-        Integer test = R.drawable.meat;
+        Integer image = R.drawable.meat;
         Resources res = getResources();
         String[] types = res.getStringArray(R.array.Category);
 
         for (int i = 0; i < types.length; i++) {
             if(category.equals(types[i])){
-                test = images[i];
+                image = images[i];
             }
         }
 
-        foods.add(new Food(itemName, test));
-        adaptor.foodsFull.add(new Food(itemName, test));
+        Food item = new Food(itemName, exMonth, exDay, exYear, category, image, notificationOnOff);
+
+        foods.add(item);
+        adaptor.foodsFull.add(item);
         adaptor.notifyItemChanged(foods.size()-1);
     }
 
