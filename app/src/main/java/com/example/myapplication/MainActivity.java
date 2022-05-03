@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,7 +10,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +23,6 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener, ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2{
     RecyclerView foodList;
@@ -140,5 +137,38 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
             }
         });
         return true;
+    }
+
+    @Override
+    public void applyTexts2(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, int p) {
+        Integer image = foods.get(p).getImage();
+        Resources res = getResources();
+        String[] types = res.getStringArray(R.array.Category);
+
+        for (int i = 0; i < types.length; i++) {
+            if(category.equals(types[i])){
+                image = images[i];
+            }
+        }
+
+        foods.get(p).setImage(image);
+        foods.get(p).setName(foodName);
+        foods.get(p).setNotification(notificationOnOff);
+        foods.get(p).setType(category);
+        foods.get(p).setxDay(exDay);
+        foods.get(p).setxMonth(exMonth);
+        foods.get(p).setxYear(exYear);
+
+
+      adaptor.foodsFull.get(p).setImage(image);
+        adaptor.foodsFull.get(p).setName(foodName);
+        adaptor.foodsFull.get(p).setNotification(notificationOnOff);
+        adaptor.foodsFull.get(p).setType(category);
+       adaptor.foodsFull.get(p).setxDay(exDay);
+        adaptor.foodsFull.get(p).setxMonth(exMonth);
+        adaptor.foodsFull.get(p).setxYear(exYear);
+
+
+        adaptor.notifyItemChanged(foods.size()-1);
     }
 }

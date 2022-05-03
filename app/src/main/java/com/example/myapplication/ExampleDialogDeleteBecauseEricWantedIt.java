@@ -20,7 +20,7 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
     private EditText foodItemName, yearEd;
     private Spinner exMonthSpinner, exDaySpinner, categorySpinner;
     private Switch notificationSwitch;
-    private ExampleDialog.ExampleDialogListener listener;
+    private ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2 listener;
     Food food;
     int position;
     Context context;
@@ -57,7 +57,7 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
                         String exDay = exDaySpinner.getSelectedItem().toString();
                         String category = categorySpinner.getSelectedItem().toString();
                         boolean notificationOnOFf = notificationSwitch.isChecked();
-                        listener.applyTexts(username, exYear, exMonth, exDay, notificationOnOFf, category);
+                        listener.applyTexts2(username, exYear, exMonth, exDay, notificationOnOFf, category, position);
                     }
                 }).setNeutralButton("Delete", new DialogInterface.OnClickListener() {
             @Override
@@ -106,6 +106,8 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
 
         foodItemName.setText(food.getName());
         yearEd.setText(food.getxYear());
+        notificationSwitch.setChecked(food.isNotification());
+
     }
 
     @Override
@@ -113,7 +115,7 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
         super.onAttach(context);
 
         try {
-            listener = (ExampleDialog.ExampleDialogListener) context;
+            listener = (ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() +
                     "must implement ExampleDialogListener");
@@ -122,6 +124,6 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
 //TODO Figured it out, use a listener in mainactivity to send data right here and set it to the text for date. WEEWOOOO.
 
     public interface ExampleDialogListener2 {
-        void applyTexts(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category);
+        void applyTexts2(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, int p);
     }
 }
