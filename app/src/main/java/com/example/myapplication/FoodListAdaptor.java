@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -107,7 +108,7 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
         }
 
         @Override
-        public void applyTexts(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category) {
+        public void applyTexts2(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, int p) {
 
         }
     }

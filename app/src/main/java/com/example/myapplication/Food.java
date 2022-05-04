@@ -1,21 +1,42 @@
 package com.example.myapplication;
 
 public class Food {
-    String name, expirationDate, type;
+    String name, xMonth, xDay, xYear, type;
     Integer image;
     boolean notification;
 
-    public Food(String name, String expirationDate, String type, Integer image, boolean notification) {
+    public Food(String name, String xMonth, String xDay, String xYear, String type, Integer image, boolean notification) {
         this.name = name;
-        this.expirationDate = expirationDate;
+        this.xMonth = xMonth;
+        this.xDay = xDay;
+        this.xYear = xYear;
         this.type = type;
         this.image = image;
         this.notification = notification;
     }
 
-    public Food(String name, Integer image){
-        this.name = name;
-        this.image = image;
+    public String getxMonth() {
+        return xMonth;
+    }
+
+    public void setxMonth(String xMonth) {
+        this.xMonth = xMonth;
+    }
+
+    public String getxDay() {
+        return xDay;
+    }
+
+    public void setxDay(String xDay) {
+        this.xDay = xDay;
+    }
+
+    public String getxYear() {
+        return xYear;
+    }
+
+    public void setxYear(String xYear) {
+        this.xYear = xYear;
     }
 
     public String getName() {
@@ -24,14 +45,6 @@ public class Food {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
     }
 
     public String getType() {
