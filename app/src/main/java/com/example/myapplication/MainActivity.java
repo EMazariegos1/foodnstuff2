@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     }
 
     public void openDialog() {
-        ExampleDialog exampleDialog = new ExampleDialog();
+        ExampleDialog exampleDialog = new ExampleDialog(this);
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
     public void openEditDialog(Food food, int position, Context c){
