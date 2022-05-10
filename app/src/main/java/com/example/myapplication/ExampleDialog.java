@@ -27,6 +27,7 @@ public class ExampleDialog extends AppCompatDialogFragment implements DatePicker
    private Switch notificationSwitch;
    private ExampleDialogListener listener;
    private Context context;
+   private int day, month, year;
 
    public ExampleDialog(Context c) {
       context = c;
@@ -50,9 +51,9 @@ public class ExampleDialog extends AppCompatDialogFragment implements DatePicker
                  @Override
                  public void onClick(DialogInterface dialogInterface, int i) {
                     String username = foodItemName.getText().toString();
-                    String exYear = yearEd.getText().toString();
-                    String exMonth = exMonthSpinner.getSelectedItem().toString();
-                    String exDay = exDaySpinner.getSelectedItem().toString();
+                    String exYear =  "" + year;
+                    String exMonth =  "" + month;
+                    String exDay =  "" + day;
                     String category = categorySpinner.getSelectedItem().toString();
                     boolean notificationOnOFf = notificationSwitch.isChecked();
                     listener.applyTexts(username, exYear, exMonth, exDay, notificationOnOFf, category);
@@ -62,27 +63,16 @@ public class ExampleDialog extends AppCompatDialogFragment implements DatePicker
       foodItemName = view.findViewById(R.id.food_name);
       notificationSwitch = view.findViewById(R.id.notification_switch);
       categorySpinner = view.findViewById(R.id.category_spinner);
-      Button button =  view.findViewById(R.id.button);
-      button.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-            DialogFragment datePicker = new DatePickerFragment();
-            datePicker.show(((MainActivity)context).getSupportFragmentManager(), "date picker");
-         }
-      });
+
       return builder.create();
    }
    @Override
    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-      Calendar c = Calendar.getInstance();
-      c.set(Calendar.YEAR, year);
-      c.set(Calendar.MONTH, month);
-      c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-      String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
-
-      TextView textView = view.findViewById(R.id.textView);
-      textView.setText(currentDateString);
+      this.year = year;
+      this.month = month;
+      this.day = dayOfMonth;
    }
+
 
    @Override
    public void onAttach(Context context) {

@@ -62,5 +62,6 @@
         android:layout_marginStart="113dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="120dp"
+        android:onClick="onClick"
         android:text="open date picker" />
 </RelativeLayout>

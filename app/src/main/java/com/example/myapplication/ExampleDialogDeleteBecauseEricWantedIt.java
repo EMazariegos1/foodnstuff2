@@ -74,9 +74,6 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
         days = res.getStringArray(R.array.Day);
 
         foodItemName = view.findViewById(R.id.food_name);
-        yearEd = view.findViewById(R.id.expiration_year);
-        exMonthSpinner = view.findViewById(R.id.month_spinner);
-        exDaySpinner = view.findViewById(R.id.day_spinner);
         notificationSwitch = view.findViewById(R.id.notification_switch);
         categorySpinner = view.findViewById(R.id.category_spinner);
 

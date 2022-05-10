@@ -3,9 +3,11 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.DatePicker;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,12 +27,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener, ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2{
+public class MainActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener, ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2, DatePickerDialog.OnDateSetListener{
     RecyclerView foodList;
     List<Food> foods;
     FoodListAdaptor adaptor;
-    private Button opdialog;
+    private Button opdialog, but;
     Integer[] images;
+    int year, day, month;
     private static final String SHARED_PREF_KEY = "shared_preferences";
     private static final String EVENT_LIST_KEY = "event_list_key";
 
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         foodList = findViewById(R.id.food_list);
+        but = findViewById(R.id.button);
 
         foods = new ArrayList<>();
         loadEvents();
@@ -57,6 +62,13 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
             }
         });
 
+
+    }
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        this.year = year;
+        this.month = month;
+        this.day = dayOfMonth;
     }
 
     private void saveEvents() {
@@ -67,7 +79,10 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         editor.putString(EVENT_LIST_KEY, eventListString);
         editor.apply();
     }
-
+    public void onClick(View v) {
+        DialogFragment datePicker = new DatePickerFragment();
+        datePicker.show(getSupportFragmentManager(), "date picker");
+    }
     @Override
     protected void onPause() {
         super.onPause();
