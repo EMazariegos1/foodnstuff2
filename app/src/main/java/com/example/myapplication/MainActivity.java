@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     RecyclerView foodList;
     List<Food> foods;
     FoodListAdaptor adaptor;
-    private Button opdialog, but;
+    private Button opdialog;
     Integer[] images;
     int year, day, month;
     private static final String SHARED_PREF_KEY = "shared_preferences";
@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         foodList = findViewById(R.id.food_list);
-        but = findViewById(R.id.button);
-
         foods = new ArrayList<>();
         loadEvents();
 
@@ -64,8 +62,15 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
 
 
     }
+    //TODO Maybe add a int or boolean to differentiate between Expiration and Time placed. Not sure
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        this.year = year;
+        this.month = month;
+        this.day = dayOfMonth;
+    }
+    @Override
+    public void onDateSet2(DatePicker view, int year, int month, int dayOfMonth) {
         this.year = year;
         this.month = month;
         this.day = dayOfMonth;
@@ -82,6 +87,10 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     public void onClick(View v) {
         DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker");
+    }
+    public void onClick2(View v) {
+        DialogFragment datePicker = new DatePickerFragment2();
+        datePicker.show(getSupportFragmentManager(), "date picker 2");
     }
     @Override
     protected void onPause() {

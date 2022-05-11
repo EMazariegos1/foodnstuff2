@@ -20,7 +20,7 @@
         android:id="@+id/category_spinner"
         android:layout_width="230dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/expirationCalender"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="91dp"
@@ -53,15 +53,27 @@
         android:text="Enter Expiration Date (M/D/Y)" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/placeInFridgeCalender"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ex_dateTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="4dp"
+        android:layout_toStartOf="@+id/expirationCalender"
+        android:onClick="onClick"
+        android:text="open date picker" />
+
+    <Button
+        android:id="@+id/expirationCalender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ex_dateTV"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="31dp"
         android:onClick="onClick"
         android:text="open date picker" />
+
 </RelativeLayout>

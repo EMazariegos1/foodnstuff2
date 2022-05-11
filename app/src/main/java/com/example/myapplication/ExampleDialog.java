@@ -21,7 +21,7 @@ import androidx.fragment.app.DialogFragment;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class ExampleDialog extends AppCompatDialogFragment implements DatePickerDialog.OnDateSetListener{
+public class ExampleDialog extends AppCompatDialogFragment{
    private EditText foodItemName, yearEd;
    private Spinner exMonthSpinner, exDaySpinner, categorySpinner;
    private Switch notificationSwitch;
@@ -65,12 +65,6 @@ public class ExampleDialog extends AppCompatDialogFragment implements DatePicker
       categorySpinner = view.findViewById(R.id.category_spinner);
 
       return builder.create();
-   }
-   @Override
-   public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-      this.year = year;
-      this.month = month;
-      this.day = dayOfMonth;
    }
 
 
