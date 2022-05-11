@@ -15,7 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     FoodListAdaptor adaptor;
     private Button opdialog;
     Integer[] images;
+    Spinner sortingItems;
     private static final String SHARED_PREF_KEY = "shared_preferences";
     private static final String EVENT_LIST_KEY = "event_list_key";
 
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         foodList = findViewById(R.id.food_list);
+        sortingItems = findViewById(R.id.sortItems);
 
         foods = new ArrayList<>();
         loadEvents();
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
 
 //code for recyclerview
         adaptor = new FoodListAdaptor(this, foods);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL,false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         foodList.setLayoutManager(gridLayoutManager);
         foodList.setAdapter(adaptor);
         opdialog = (Button) findViewById(R.id.open_dialog);
@@ -57,6 +61,31 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
             }
         });
 
+        sortingItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+                String category = (String) adapterView.getItemAtPosition(pos);
+                foods.clear();
+                for (int i = 0; i < adaptor.foodsFull.size(); i++) {
+                    if(category.equals(adaptor.foodsFull.get(i).getType())){
+                        foods.add(adaptor.foodsFull.get(i));
+                    }
+                    else if(category.equals("All")){
+                        foods.clear();
+                        foods.addAll(adaptor.foodsFull);
+                    }
+                    else if (category.equals("No Category") && adaptor.foodsFull.get(i).getType().equals("Categories")){
+                        foods.add(adaptor.foodsFull.get(i));
+                    }
+                }
+                adaptor.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private void saveEvents() {

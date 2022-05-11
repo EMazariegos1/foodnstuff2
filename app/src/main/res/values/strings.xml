@@ -43,6 +43,18 @@
         <item>Pastry</item>
         <item>Condiments</item>
     </string-array>
+
+    <string-array name="sortCategory">
+        <item>All</item>
+        <item>Meat</item>
+        <item>Vegetable</item>
+        <item>Fruit</item>
+        <item>Dairy</item>
+        <item>Pastry</item>
+        <item>Condiments</item>
+        <item>No Category</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string-array name="Month">
         <item>January</item>
