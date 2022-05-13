@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     FoodListAdaptor adaptor;
     private Button opdialog;
     Integer[] images;
-    int year, day, month;
+    TextView tv;
+    int year, day, month,year2, day2, month2, id;
     private static final String SHARED_PREF_KEY = "shared_preferences";
     private static final String EVENT_LIST_KEY = "event_list_key";
 
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         foodList = findViewById(R.id.food_list);
         foods = new ArrayList<>();
         loadEvents();
-
+        tv = findViewById(R.id.date);
         images = new Integer[]{R.drawable.ic_baseline_add_photo_alternate, R.drawable.meat, R.drawable.vegetable, R.drawable.fruit, R.drawable.dairy, R.drawable.pastry, R.drawable.condiments};
 
 //code for recyclerview
@@ -65,15 +67,16 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     //TODO Maybe add a int or boolean to differentiate between Expiration and Time placed. Not sure
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        this.year = year;
-        this.month = month;
-        this.day = dayOfMonth;
-    }
-    @Override
-    public void onDateSet2(DatePicker view, int year, int month, int dayOfMonth) {
-        this.year = year;
-        this.month = month;
-        this.day = dayOfMonth;
+        if(id == 1) {
+            this.year = year;
+            this.month = month;
+            this.day = dayOfMonth;
+        }
+        else{
+            this.year2 = year;
+            this.month2 = month;
+            this.day2 = dayOfMonth;
+        }
     }
 
     private void saveEvents() {
@@ -85,11 +88,13 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         editor.apply();
     }
     public void onClick(View v) {
+        id = 1;
         DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker");
     }
     public void onClick2(View v) {
-        DialogFragment datePicker = new DatePickerFragment2();
+        id = 2;
+        DialogFragment datePicker = new DatePickerFragment();
         datePicker.show(getSupportFragmentManager(), "date picker 2");
     }
     @Override
@@ -131,11 +136,13 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
             }
         }
 
-        Food item = new Food(itemName, exMonth, exDay, exYear, category, image, notificationOnOff);
+        Food item = new Food(itemName, month+"", day+"", year+"", category, image, notificationOnOff);
 
         foods.add(item);
         adaptor.foodsFull.add(item);
         adaptor.notifyItemChanged(foods.size()-1);
+        tv.setText(month + "/"+ day +"/" +year + "/");
+
     }
 
     @Override
@@ -179,9 +186,9 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         foods.get(p).setName(foodName);
         foods.get(p).setNotification(notificationOnOff);
         foods.get(p).setType(category);
-        foods.get(p).setxDay(exDay);
-        foods.get(p).setxMonth(exMonth);
-        foods.get(p).setxYear(exYear);
+        foods.get(p).setxDay(day2+"");
+        foods.get(p).setxMonth(month2+"");
+        foods.get(p).setxYear(year2+"");
 
 
       adaptor.foodsFull.get(p).setImage(image);
