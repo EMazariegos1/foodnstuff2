@@ -1,11 +1,11 @@
 package com.example.myapplication;
 
 public class Food {
-    String name, xMonth, xDay, xYear, type;
+    String name, xMonth, xDay, xYear, type, quantity;
     Integer image;
     boolean notification;
 
-    public Food(String name, String xMonth, String xDay, String xYear, String type, Integer image, boolean notification) {
+    public Food(String name, String xMonth, String xDay, String xYear, String type, Integer image, boolean notification, String quantity) {
         this.name = name;
         this.xMonth = xMonth;
         this.xDay = xDay;
@@ -13,6 +13,15 @@ public class Food {
         this.type = type;
         this.image = image;
         this.notification = notification;
+        this.quantity = quantity;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getxMonth() {

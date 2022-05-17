@@ -1,29 +1,21 @@
 package com.example.myapplication;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.DialogFragment;
-
-import java.text.DateFormat;
-import java.util.Calendar;
 
 public class ExampleDialog extends AppCompatDialogFragment{
-   private EditText foodItemName, yearEd;
-   private Spinner exMonthSpinner, exDaySpinner, categorySpinner;
+   private EditText foodItemName, quatityOfItem;
+   private Spinner categorySpinner;
    private Switch notificationSwitch;
    private ExampleDialogListener listener;
    private Context context;
@@ -50,15 +42,18 @@ public class ExampleDialog extends AppCompatDialogFragment{
               .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                  @Override
                  public void onClick(DialogInterface dialogInterface, int i) {
+                    String quantity = quatityOfItem.getText().toString();
                     String username = foodItemName.getText().toString();
                     String exYear =  "" + year;
                     String exMonth =  "" + month;
                     String exDay =  "" + day;
                     String category = categorySpinner.getSelectedItem().toString();
                     boolean notificationOnOFf = notificationSwitch.isChecked();
-                    listener.applyTexts(username, exYear, exMonth, exDay, notificationOnOFf, category);
+                    listener.applyTexts(username, exYear, exMonth, exDay, notificationOnOFf, category, quantity);
                  }
               });
+
+      quatityOfItem = view.findViewById(R.id.quatityItem);
 
       foodItemName = view.findViewById(R.id.food_name);
       notificationSwitch = view.findViewById(R.id.notification_switch);
@@ -82,6 +77,6 @@ public class ExampleDialog extends AppCompatDialogFragment{
 //TODO Figured it out, use a listener in mainactivity to send data right here and set it to the text for date. WEEWOOOO.
 
    public interface ExampleDialogListener {
-      void applyTexts(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category);
+      void applyTexts(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, String quantity);
    }
 }

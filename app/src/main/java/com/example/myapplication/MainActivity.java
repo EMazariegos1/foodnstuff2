@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     }
 
     @Override
-    public void applyTexts(String itemName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category) {
+    public void applyTexts(String itemName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, String quantity) {
         Integer image = R.drawable.meat;
         Resources res = getResources();
         String[] types = res.getStringArray(R.array.Category);
@@ -136,12 +136,12 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
             }
         }
 
-        Food item = new Food(itemName, month+"", day+"", year+"", category, image, notificationOnOff);
+        Food item = new Food(itemName, month+"", day+"", year+"", category, image, notificationOnOff, quantity);
 
         foods.add(item);
         adaptor.foodsFull.add(item);
         adaptor.notifyItemChanged(foods.size()-1);
-        tv.setText(month + "/"+ day +"/" +year + "/");
+        tv.setText(month + "/"+ day +"/" +year);
 
     }
 
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     }
 
     @Override
-    public void applyTexts2(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, int p) {
+    public void applyTexts2(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, int p, String quantityFood) {
         Integer image = foods.get(p).getImage();
         Resources res = getResources();
         String[] types = res.getStringArray(R.array.Category);

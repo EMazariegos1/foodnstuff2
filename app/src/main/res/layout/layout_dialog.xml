@@ -6,14 +6,12 @@
     <EditText
         android:id="@+id/food_name"
         style="@android:style/Widget.Material.EditText"
-        android:layout_width="match_parent"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="18dp"
         android:hint="Item Name" />
 
     <Spinner
@@ -54,12 +52,12 @@
 
     <Button
         android:id="@+id/placeInFridgeCalender"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ex_dateTV"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:layout_toStartOf="@+id/expirationCalender"
         android:onClick="onClick"
@@ -67,13 +65,29 @@
 
     <Button
         android:id="@+id/expirationCalender"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ex_dateTV"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="31dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="83dp"
         android:onClick="onClick"
         android:text="open date picker" />
+
+    <EditText
+        android:id="@+id/quatityItem"
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/food_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="-1dp"
+        android:layout_toEndOf="@+id/food_name"
+        android:ems="10"
+        android:hint="Quantity"
+        android:inputType="number" />
 
 </RelativeLayout>

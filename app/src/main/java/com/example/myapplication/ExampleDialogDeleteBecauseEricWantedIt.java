@@ -14,10 +14,8 @@ import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import java.util.ArrayList;
-
 public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragment {
-    private EditText foodItemName, yearEd;
+    private EditText foodItemName, yearEd, quantityOfItem;
     private Spinner exMonthSpinner, exDaySpinner, categorySpinner;
     private Switch notificationSwitch;
     private ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2 listener;
@@ -51,13 +49,14 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String quantity = quantityOfItem.getText().toString();
                         String username = foodItemName.getText().toString();
-                        String exYear = yearEd.getText().toString();
-                        String exMonth = exMonthSpinner.getSelectedItem().toString();
-                        String exDay = exDaySpinner.getSelectedItem().toString();
+                        String exYear = "";
+                        String exMonth = "";
+                        String exDay = "";
                         String category = categorySpinner.getSelectedItem().toString();
                         boolean notificationOnOFf = notificationSwitch.isChecked();
-                        listener.applyTexts2(username, exYear, exMonth, exDay, notificationOnOFf, category, position);
+                        listener.applyTexts2(username, exYear, exMonth, exDay, notificationOnOFf, category, position, quantity);
                     }
                 }).setNeutralButton("Delete", new DialogInterface.OnClickListener() {
             @Override
@@ -67,7 +66,7 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
                 ((MainActivity)context).adaptor.notifyItemRemoved(position);
             }
         });
-
+        quantityOfItem = view.findViewById(R.id.quatityItem);
         Resources res = getResources();
         categoryChoices = res.getStringArray(R.array.Category);
         months = res.getStringArray(R.array.Month);
@@ -89,21 +88,10 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
             }
         }
 
-        for (int i = 0; i < months.length; i++) {
-            if(food.getxMonth().equals(months[i])){
-                exMonthSpinner.setSelection(i);
-            }
-        }
-
-        for (int i = 0; i < days.length; i++) {
-            if(food.getxDay().equals(days[i])){
-                exDaySpinner.setSelection(i);
-            }
-        }
 
         foodItemName.setText(food.getName());
-        yearEd.setText(food.getxYear());
         notificationSwitch.setChecked(food.isNotification());
+        quantityOfItem.setText(food.getQuantity());
 
     }
 
@@ -121,6 +109,6 @@ public class ExampleDialogDeleteBecauseEricWantedIt extends AppCompatDialogFragm
 //TODO Figured it out, use a listener in mainactivity to send data right here and set it to the text for date. WEEWOOOO.
 
     public interface ExampleDialogListener2 {
-        void applyTexts2(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, int p);
+        void applyTexts2(String foodName, String exYear, String exMonth, String exDay, boolean notificationOnOff, String category, int p, String quantityItem);
     }
 }
