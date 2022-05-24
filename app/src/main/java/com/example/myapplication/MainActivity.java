@@ -36,6 +36,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ExampleDialog.ExampleDialogListener, ExampleDialogDeleteBecauseEricWantedIt.ExampleDialogListener2{
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         prefs = getSharedPreferences(Activity.class.getSimpleName(), Context.MODE_PRIVATE);
         NOTIFICATION_ID = prefs.getInt("notificationNumber", 0);
 
-        registerReceiver(mReceiver,new IntentFilter(ACTION_UPDATE_NOTIFICATION));
+        registerReceiver(mReceiver, new IntentFilter(ACTION_UPDATE_NOTIFICATION));
 
         foods = new ArrayList<>();
         loadEvents();
@@ -165,7 +167,12 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         Food item = new Food(itemName, exMonth, exDay, exYear, category, image, notificationOnOff);
 
         if (notificationOnOff){
-            sendNotification();
+            if(itemName.equals("")){
+                sendNotification("food");
+            }
+            else {
+                sendNotification(itemName);
+            }
         }
 
         foods.add(item);
@@ -232,12 +239,11 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
     }
 
     //code for notification from here down
-    public void sendNotification() {
+    public void sendNotification(String content) {
         Intent updateIntent = new Intent(ACTION_UPDATE_NOTIFICATION);
         PendingIntent updatePendingIntent = PendingIntent.getBroadcast
                 (this, NOTIFICATION_ID, updateIntent, PendingIntent.FLAG_ONE_SHOT);
-        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
-        notifyBuilder.addAction(R.drawable.ic_search, "Update Notification", updatePendingIntent);
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder(content);
         mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 
         SharedPreferences.Editor editor = prefs.edit();
@@ -259,30 +265,20 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         }
     }
 
-    private NotificationCompat.Builder getNotificationBuilder(){
+    private NotificationCompat.Builder getNotificationBuilder(String content){
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent notificationPendingIntent = PendingIntent.getActivity(this, NOTIFICATION_ID,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
-                .setContentTitle("You've been notified!")
-                .setContentText("This is your notification text.")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Expiration Notification")
+                .setContentText("your " +content+ " is going to expire soon")
+                .setSmallIcon(R.mipmap.ic_launcher2_round)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentIntent(notificationPendingIntent)
                 .setAutoCancel(true)
                 .setDeleteIntent(notificationPendingIntent);
         return notifyBuilder;
-    }
-
-    public void updateNotification() {
-        Bitmap androidImage = BitmapFactory
-                .decodeResource(getResources(),R.drawable.ic_search);
-        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
-        notifyBuilder.setStyle(new NotificationCompat.BigPictureStyle()
-                .bigPicture(androidImage)
-                .setBigContentTitle("Notification Updated!"));
-        mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
     }
 
     @Override
@@ -298,7 +294,6 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateNotification();
         }
     }
 }
