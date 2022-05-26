@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ExampleDialog.Exa
         foods = new ArrayList<>();
         loadEvents();
 
-        images = new Integer[]{R.drawable.ic_baseline_add_photo_alternate, R.drawable.meat, R.drawable.vegetable, R.drawable.fruit, R.drawable.dairy, R.drawable.pastry, R.drawable.condiments};
+        images = new Integer[]{R.drawable.ic_baseline_add_photo_alternate, R.drawable.meat, R.drawable.vegetable, R.drawable.fruit, R.drawable.dairy, R.drawable.pastry, R.drawable.condiments, R.drawable.bev, R.drawable.leftover};
 
 //code for recyclerview
         adaptor = new FoodListAdaptor(this, foods);
