@@ -105,6 +105,16 @@ public class FoodListAdaptor extends RecyclerView.Adapter<FoodListAdaptor.ViewHo
                     ((MainActivity)context).openEditDialog(foods.get(getAdapterPosition()), getAdapterPosition(), context);
                 }
             });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ((MainActivity)context).foods.remove(getAdapterPosition());
+                    ((MainActivity)context).adaptor.foodsFull.remove(getAdapterPosition());
+                    ((MainActivity)context).adaptor.notifyItemRemoved(getAdapterPosition());
+                    return true;
+                }
+            });
         }
 
         @Override

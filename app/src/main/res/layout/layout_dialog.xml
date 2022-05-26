@@ -63,15 +63,16 @@
 
     <TextView
         android:id="@+id/ex_dateTV"
-        android:layout_width="207dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/food_name"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="71dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="14dp"
-        android:layout_marginEnd="133dp"
-        android:text="Enter Expiration Date (M/D/Y)" />
+        android:layout_marginEnd="100dp"
+        android:text="Enter Expiration Date (M/D/Y)"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/expiration_year"
